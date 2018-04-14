@@ -1,6 +1,6 @@
 # foo
 
-> foo sample
+> vue sample todo list
 
 ## Build Setup
 
