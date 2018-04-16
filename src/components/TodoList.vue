@@ -2,7 +2,7 @@
   <div>
     <ul id="todo-list">
       <add-todo v-on:create-todo="onCreate"></add-todo>
-      <li v-for="todo in todos"
+      <li v-for="todo in data"
           :data-id="todo.id"
           :class="[{completed: todo.completed, editing: todo.editing}]"
         >
@@ -15,7 +15,7 @@
       </li>
     </ul>
     <footer id="footer">
-      <strong>{{ getActive.length }}</strong> {{ getActive.length == 1 ? 'item' : 'items'}} left
+      <strong>{{ data.length }}</strong> {{ data.length == 1 ? 'item' : 'items'}} left
       <ul>
         <li>
           <a :class="selectedClass('all')" href="#/">All</a>
@@ -28,6 +28,11 @@
         </li>
       </ul>
     </footer>
+    <button
+      @click.prevent="clearCompleted"
+      >
+      {{`Clear completed (${getCompleted.length})`}}
+    </button>
   </div>
 </template>
 
@@ -43,21 +48,27 @@ export default {
   },
   mounted() {
     this.state = this.getHashState();
-    console.log(this.state);
     window.onhashchange = () => {
       this.state = this.getHashState();
     }
   },
   computed: {
-     getAll() {
-      return this.todos
-     },
-     getActive () {
-      return this.todos
-     },
-     getCompleted () {
-      return this.todos
-     }
+    data () {
+      switch (this.state) {
+        case 'all':
+          return this.getTodos(todo => {
+            todo.editing = false
+            return todo;
+          });
+        case 'active':
+          return this.getTodos(todo => !todo.completed);
+        case 'completed':
+          return this.getTodos(todo => todo.completed);
+      }
+    },
+    getCompleted () {
+      return this.getTodos(todo => todo.completed);
+    }
   },
   data() {
     return {
@@ -66,6 +77,9 @@ export default {
     }
   },
   methods: {
+    getTodos(func) {
+      return this.todos.filter(func);
+    },
     selectedClass(name) {
       return {
         selected: this.getHashState() === name
@@ -91,6 +105,9 @@ export default {
     onEditingComplete(todo) {
       const todoIndex = this.todos.indexOf(todo);
       this.todos[todoIndex].content = todo.content;
+    },
+    clearCompleted() {
+      this.todos = this.getTodos(item => !item.completed);
     }
   }
 };
