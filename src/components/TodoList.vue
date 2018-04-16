@@ -39,6 +39,7 @@
 <script>
 import AddTodo from './AddTodo'
 import Todo from './Todo'
+import storage from '../utils/localstorage'
 
 export default {
   name: 'TodoList',
@@ -72,7 +73,7 @@ export default {
   },
   data() {
     return {
-      todos: [],
+      todos: storage.get(),
       state: 'all'
     }
   },
@@ -90,13 +91,16 @@ export default {
     },
     onCreate(todo) {
       this.todos.push(todo)
+      storage.set(this.todos);
     },
     onDelete(todo) {
       this.todos = this.todos.filter(item => item.id !== todo.id);
+      storage.set(this.todos);
     },
     onComplete(todo) {
       const todoIndex = this.todos.indexOf(todo);
       this.todos[todoIndex].completed = todo.completed;
+      storage.set(this.todos);
     },
     onEditing(todo) {
       const todoIndex = this.todos.indexOf(todo);
@@ -105,9 +109,11 @@ export default {
     onEditingComplete(todo) {
       const todoIndex = this.todos.indexOf(todo);
       this.todos[todoIndex].content = todo.content;
+      storage.set(this.todos);
     },
     clearCompleted() {
       this.todos = this.getTodos(item => !item.completed);
+      storage.set(this.todos);
     }
   }
 };
