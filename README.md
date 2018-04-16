@@ -1,6 +1,6 @@
-# foo
+# sample Todo List
 
-> vue sample todo list
+> vue.js sample todo list without state management
 
 ## Build Setup
 
