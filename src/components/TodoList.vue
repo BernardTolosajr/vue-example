@@ -5,6 +5,7 @@
       <li v-for="todo in data"
           :data-id="todo.id"
           :class="[{completed: todo.completed, editing: todo.editing}]"
+          :key=todo.id
         >
         <todo
           :todo="todo"
@@ -37,9 +38,9 @@
 </template>
 
 <script>
-import AddTodo from './AddTodo'
-import Todo from './Todo'
-import storage from '../utils/localstorage'
+import AddTodo from './AddTodo';
+import Todo from './Todo';
+import storage from '../utils/localstorage';
 
 export default {
   name: 'TodoList',

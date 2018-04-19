@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="content" type='text' @keyup.enter="add()">
+    <input id="new-todo" v-model="content" type='text' @keyup.enter="add()">
     <button v-on:click="add()">
       Create
     </button>
@@ -20,12 +20,14 @@
       add() {
         const id = String(+ new Date());
         const content = this.content;
-        this.$emit('create-todo', {
-          id,
-          content,
-          completed: false,
-          editing: false
-        });
+        if (content) {
+          this.$emit('create-todo', {
+            id,
+            content,
+            completed: false,
+            editing: false
+          });
+        }
       }
     }
   }
