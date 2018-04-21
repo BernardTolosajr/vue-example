@@ -1,6 +1,9 @@
-# sample Todo List
 
-> vue.js sample todo list without state management
+[travis-image]: https://travis-ci.org/BernardTolosajr/awesome-practice-projects.svg?branch=master
+
+# Vue.js sample Todo list
+
+> vue.js Sample todo list without state management.
 
 ## Build Setup
 
