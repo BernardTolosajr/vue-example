@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import AddTodo from '@/components/AddTodo';
+import AddTodo from '@/components/AddTodo.vue';
 import { expect } from 'chai';
 
 describe('AddTodo', () => {
