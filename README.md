@@ -1,7 +1,6 @@
-
-[travis-image]: https://travis-ci.org/BernardTolosajr/awesome-practice-projects.svg?branch=master
-
 # Vue.js sample Todo list
+
+[![Build Status](https://travis-ci.org/BernardTolosajr/awesome-practice-projects.svg?branch=master)](https://travis-ci.org/BernardTolosajr/awesome-practice-projects)
 
 > vue.js Sample todo list without state management.
 
